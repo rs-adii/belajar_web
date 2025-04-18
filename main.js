@@ -8,7 +8,7 @@ function addTask() {
   if (!taskText) {
     return;
   }
-  
+
   let li = document.createElement("li");
   li.innerHTML = `<span>${taskText}</span><button onclick="removeTask(this)>X</button>`;
   document.getElementById("taskList").appendChild(li);
@@ -26,7 +26,7 @@ function toggleComplete(task) {
 
 function saveTask(taskText) {
   let tasks = loadTask();
-  tasks.push(taskText);
+  tasks.push({text: taskText, completed: false});
   localStorage.setItem('tasks', JSON.stringify(tasks));
   console.log("Tasks", tasks);
 }
@@ -47,7 +47,7 @@ function loadTask() {
     let tasks = getTaskFromStorage();
     tasks.forEach((task) => {
         let li = document.createElement("li");
-        li.innerHTML = `<span>${task}</span><button onclick="removeTask(this)>X</button>`;
+        li.innerHTML = `<span>${task.text}</span><button onclick="removeTask(this)>X</button>`;
         document.getElementById("taskList").appendChild(li);  
     });
 }
